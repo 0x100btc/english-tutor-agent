@@ -5,9 +5,9 @@ from telegram.ext import (
     ContextTypes, filters
 )
 
-from handlers import start_handler, handle_text, handle_voice, set_mode, quiz_kid, handle_quiz_answer
-from db import init_db
-from utils import set_bot_commands
+from handlers.command import start_command, handle_text, handle_voice, set_mode, quiz_kid, handle_quiz_answer
+from db import database
+#from utils import set_bot_commands
 
 # ==================== 環境設定 ====================
 load_dotenv()
@@ -18,16 +18,16 @@ PORT = int(os.getenv("PORT", 8080))
 # ==================== 啟動應用 ====================
 if __name__ == "__main__":
     print("🚀 啟動 Telegram Webhook 機器人...")
-    init_db()
+   #db()
 
     app = (
         ApplicationBuilder()
         .token(TELEGRAM_BOT_TOKEN)
-        .post_init(set_bot_commands)
+       # .post_init(set_bot_commands)
         .build()
     )
 
-    app.add_handler(CommandHandler("start", start_handler))
+    app.add_handler(CommandHandler("start_command", start_command))
     app.add_handler(CommandHandler("quiz_kid", quiz_kid))
     app.add_handler(CallbackQueryHandler(handle_quiz_answer))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))

@@ -2,10 +2,10 @@
 
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, BotCommand
 from telegram.ext import ContextTypes
-from agent import get_agent_response
-from mode import MODE_PROMPTS, get_mode_prompt, mode_state
-from quiz import quiz_data, user_quiz_answers, send_quiz_question
-from voice import process_voice
+from services import openai_agent
+#from mode import MODE_PROMPTS, get_mode_prompt, mode_state
+#from quiz import quiz_data, user_quiz_answers, send_quiz_question
+#from voice import process_voice
 from gtts import gTTS
 import re
 
